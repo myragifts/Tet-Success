@@ -1,24 +1,31 @@
 /* =========================================================
    TET Success
    Supabase Connection
+   Production Version
    ========================================================= */
 
-const supabase = window.supabase.createClient(
-    CONFIG.SUPABASE_URL,
-    CONFIG.SUPABASE_PUBLISHABLE_KEY,
-    {
-        auth: {
-            persistSession: false,
-            autoRefreshToken: false,
-            detectSessionInUrl: false
-        },
+/* ---------------------------------------------------------
+   Create Supabase Client
+--------------------------------------------------------- */
 
-        global: {
-            headers: {
-                "X-Client-Info": "TET-Success-Web"
+const supabase = Object.freeze(
+    window.supabase.createClient(
+        CONFIG.SUPABASE_URL,
+        CONFIG.SUPABASE_PUBLISHABLE_KEY,
+        {
+            auth: {
+                persistSession: false,
+                autoRefreshToken: false,
+                detectSessionInUrl: false
+            },
+
+            global: {
+                headers: {
+                    "X-Client-Info": "TET-Success-Web"
+                }
             }
         }
-    }
+    )
 );
 
 /* ---------------------------------------------------------
@@ -36,7 +43,7 @@ async function checkSupabaseConnection() {
 
         if (error) {
 
-            console.error("Supabase Connection Failed", error);
+            console.error("Supabase Connection Failed:", error);
 
             return false;
 
@@ -48,7 +55,7 @@ async function checkSupabaseConnection() {
 
     } catch (err) {
 
-        console.error(err);
+        console.error("Unexpected Supabase Error:", err);
 
         return false;
 
@@ -62,28 +69,51 @@ async function checkSupabaseConnection() {
 
 async function initializeBackend() {
 
-    const connected = await checkSupabaseConnection();
+    try {
 
-    if (!connected) {
+        const connected = await checkSupabaseConnection();
 
-        console.error("Unable to connect database.");
+        if (!connected) {
+
+            console.error("Unable to connect to Supabase.");
+
+            return false;
+
+        }
+
+        const settingsLoaded = await loadTetAppSettings();
+
+        if (!settingsLoaded) {
+
+            console.error("Unable to load App Settings.");
+
+            return false;
+
+        }
+
+        console.log("Backend Initialized Successfully");
+
+        return true;
+
+    } catch (err) {
+
+        console.error("Backend Initialization Failed:", err);
 
         return false;
 
     }
 
-    const settingsLoaded = await loadTetAppSettings();
+}
 
-    if (!settingsLoaded) {
+/* ---------------------------------------------------------
+   Check Backend Ready
+--------------------------------------------------------- */
 
-        console.error("Unable to load App Settings.");
+function isBackendReady() {
 
-        return false;
-
-    }
-
-    console.log("Backend Initialized Successfully");
-
-    return true;
+    return (
+        typeof supabase !== "undefined" &&
+        isAppSettingsLoaded()
+    );
 
 }
