@@ -807,3 +807,272 @@ id="subscriptionModal">
     </div>
 
 </div>
+<!-- =======================================================
+SCRIPT FILES
+======================================================= -->
+
+<script src="config.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="supabase.js"></script>
+
+<script src="tet_app_settings.js"></script>
+
+<script src="common.js"></script>
+
+
+<script>
+
+/* =======================================================
+GLOBAL LOGIN VARIABLES
+======================================================= */
+
+let deferredInstallPrompt = null;
+
+let currentLoginUser = null;
+
+
+/* =======================================================
+PAGE INIT
+======================================================= */
+
+document.addEventListener("DOMContentLoaded", async function () {
+
+    const backendReady = await initializeBackend();
+
+    if (!backendReady) {
+
+        showToast("Unable to connect app. Please try again.", "error");
+
+        return;
+
+    }
+
+    const existingUser = getUserSession();
+
+    if (existingUser) {
+
+        window.location.href = CONFIG.HOME_PAGE;
+
+        return;
+
+    }
+
+    setupLoginEvents();
+
+    setupInstallPrompt();
+
+});
+
+
+/* =======================================================
+EVENT BINDING
+======================================================= */
+
+function setupLoginEvents() {
+
+    document.getElementById("openSignup").addEventListener("click", function () {
+
+        openLoginModal("signupModal");
+
+    });
+
+    document.getElementById("openForgotName").addEventListener("click", function () {
+
+        openLoginModal("forgotNameModal");
+
+    });
+
+    document.getElementById("openForgotPhone").addEventListener("click", function () {
+
+        openLoginModal("forgotPhoneModal");
+
+    });
+
+    document.querySelectorAll("[data-close]").forEach(function (btn) {
+
+        btn.addEventListener("click", function () {
+
+            closeLoginModal(btn.dataset.close);
+
+        });
+
+    });
+
+    document.getElementById("btnLogin").addEventListener("click", handleLogin);
+
+    document.getElementById("btnSignup").addEventListener("click", handleSignup);
+
+    document.getElementById("btnForgotName").addEventListener("click", handleForgotName);
+
+    document.getElementById("btnForgotPhone").addEventListener("click", handleForgotPhone);
+
+    document.getElementById("btnStartTrial").addEventListener("click", handleStartTrial);
+
+    document.getElementById("btnInstallNow").addEventListener("click", handleInstallNow);
+
+    document.getElementById("agreeDeclaration").addEventListener("change", handleDeclarationTick);
+
+    document.getElementById("btnSubscribeContinue").addEventListener("click", handleSubscriptionContinue);
+
+    ["loginPhone", "signupPhone", "forgotNamePhone"].forEach(function (id) {
+
+        const input = document.getElementById(id);
+
+        if (input) {
+
+            input.addEventListener("input", allowOnlyPhoneDigits);
+
+        }
+
+    });
+
+    ["loginName", "signupName", "forgotPhoneName"].forEach(function (id) {
+
+        const input = document.getElementById(id);
+
+        if (input) {
+
+            input.addEventListener("input", allowOnlyNameCharacters);
+
+        }
+
+    });
+
+}
+
+
+/* =======================================================
+MODAL HELPERS
+======================================================= */
+
+function openLoginModal(id) {
+
+    const modal = document.getElementById(id);
+
+    if (!modal) return;
+
+    modal.classList.add("show");
+
+    setTimeout(function () {
+
+        const firstInput = modal.querySelector("input");
+
+        if (firstInput) firstInput.focus();
+
+    }, 250);
+
+}
+
+
+function closeLoginModal(id) {
+
+    const modal = document.getElementById(id);
+
+    if (!modal) return;
+
+    modal.classList.remove("show");
+
+}
+
+
+/* =======================================================
+INPUT HELPERS
+======================================================= */
+
+function allowOnlyPhoneDigits(event) {
+
+    event.target.value = event.target.value.replace(/\D/g, "").slice(0, 10);
+
+}
+
+
+function allowOnlyNameCharacters(event) {
+
+    event.target.value = event.target.value
+        .replace(/[^a-zA-Z\s]/g, "")
+        .replace(/\s+/g, " ");
+
+}
+
+
+function normalizeUserName(name) {
+
+    return String(name || "")
+        .trim()
+        .replace(/\s+/g, " ")
+        .replace(/\b\w/g, function (letter) {
+
+            return letter.toUpperCase();
+
+        });
+
+}
+
+
+function validateName(name) {
+
+    const cleanName = normalizeUserName(name);
+
+    if (!cleanName) return "Please write your Full Name";
+
+    if (cleanName.length < 2) return "Minimum 2 letters required";
+
+    if (cleanName.length > 40) return "letters limit 40";
+
+    if (/[0-9]/.test(name)) return "No number allowed";
+
+    if (/[^a-zA-Z\s]/.test(name)) return "No Symbol Allowed";
+
+    const parts = cleanName.split(" ");
+
+    if (
+        parts.length > 1 &&
+        parts[0].toLowerCase() === parts[1].toLowerCase()
+    ) {
+
+        return "Name And Surname Should Different";
+
+    }
+
+    return "";
+
+}
+
+
+function validatePhone(phone) {
+
+    const value = String(phone || "");
+
+    if (!value) return "Please Write Your Ph No";
+
+    if (/\s/.test(value)) return "No Spaces Allowed";
+
+    if (/[a-zA-Z]/.test(value)) return "No Letter Allowed";
+
+    if (/[^0-9]/.test(value)) return "No Symbol Allowed";
+
+    if (value.length !== 10) return "Ph Number Should Be 10 Digit";
+
+    if (!/^[6-9]/.test(value)) return "Incorrect Ph number";
+
+    const blockedNumbers = [
+        "0000000000",
+        "1111111111",
+        "2222222222",
+        "3333333333",
+        "4444444444",
+        "5555555555",
+        "6666666666",
+        "7777777777",
+        "8888888888",
+        "9999999999",
+        "1234567890"
+    ];
+
+    if (blockedNumbers.includes(value)) return "Incorrect Ph number";
+
+    return "";
+
+}
