@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TET Success | Login</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="login-body">
+
+  <main class="login-page">
+
+    <section class="login-hero">
+      <div class="login-top-art"></div>
+
+      <div class="login-logo-box">
+        <img src="icon-192.png" alt="TET Success" class="login-logo" />
+      </div>
+
+      <h1>TET SUCCESS</h1>
+      <p class="login-tagline">Prepare • Practice • Succeed</p>
+      <div class="login-badge">WB Primary TET Preparation</div>
+    </section>
+
+    <section class="login-card">
+      <label>Your Name</label>
+      <div class="input-icon">
+        <span>👤</span>
+        <input id="loginName" type="text" placeholder="Enter your full name" autocomplete="off" />
+      </div>
+
+      <label>Mobile Number</label>
+      <div class="input-icon">
+        <span>📞</span>
+        <input id="loginPhone" type="tel" placeholder="Enter your mobile number" maxlength="10" autocomplete="off" />
+      </div>
+
+      <button class="btn btn-primary" id="signInBtn">SIGN IN <span>→</span></button>
+
+      <p class="create-link">New User? <button id="openCreateBtn">Create Your Account</button></p>
+
+      <div class="forgot-row">
+        <button id="openForgotNameBtn">👤 Forgot Name?</button>
+        <button id="openForgotPhoneBtn">📞 Forgot Phone?</button>
+      </div>
+
+      <div class="feature-row">
+        <div><span>📖</span><b>Quality Content</b><small>Exam focused study material</small></div>
+        <div><span>📝</span><b>Practice Tests</b><small>Chapter wise & full length tests</small></div>
+        <div><span>📊</span><b>Smart Analytics</b><small>Track your performance</small></div>
+        <div><span>🔖</span><b>Bookmarks</b><small>Save & revisit important topics</small></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- CREATE ACCOUNT MODAL -->
+  <div class="app-modal" id="createModal">
+    <div class="app-modal-card">
+      <button class="modal-x" data-close="createModal">×</button>
+      <div class="modal-icon">👤＋</div>
+      <h2>Create Your Account</h2>
+      <p>Let's get you started</p>
+
+      <label>Your Name</label>
+      <div class="input-icon">
+        <span>👤</span>
+        <input id="createName" type="text" placeholder="Enter your full name" autocomplete="off" />
+      </div>
+
+      <label>Mobile Number</label>
+      <div class="input-icon">
+        <span>📞</span>
+        <input id="createPhone" type="tel" placeholder="Enter your mobile number" maxlength="10" autocomplete="off" />
+      </div>
+
+      <button class="btn btn-primary" id="createAccountBtn">CREATE ACCOUNT <span>→</span></button>
+
+      <div class="or-line"><span>OR</span></div>
+      <p class="create-link">Already have an account? <button data-close="createModal">Sign In</button></p>
+    </div>
+  </div>
+
+  <!-- FORGOT NAME MODAL -->
+  <div class="app-modal" id="forgotNameModal">
+    <div class="app-modal-card">
+      <button class="modal-x" data-close="forgotNameModal">×</button>
+      <div class="modal-icon">👤?</div>
+      <h2>Forgot Your Name?</h2>
+      <p>Enter your registered mobile number and we will send your name.</p>
+
+      <label>Mobile Number</label>
+      <div class="input-icon">
+        <span>📞</span>
+        <input id="forgotNamePhone" type="tel" placeholder="Enter your mobile number" maxlength="10" autocomplete="off" />
+      </div>
+
+      <button class="btn btn-primary" id="sendNameBtn">SEND MY NAME</button>
+    </div>
+  </div>
+
+  <!-- FORGOT PHONE MODAL -->
+  <div class="app-modal" id="forgotPhoneModal">
+    <div class="app-modal-card">
+      <button class="modal-x" data-close="forgotPhoneModal">×</button>
+      <div class="modal-icon">📞?</div>
+      <h2>Forgot Your Phone Number?</h2>
+      <p>Enter your registered name and we will send your phone number.</p>
+
+      <label>Your Name</label>
+      <div class="input-icon">
+        <span>👤</span>
+        <input id="forgotPhoneName" type="text" placeholder="Enter your full name" autocomplete="off" />
+      </div>
+
+      <button class="btn btn-primary" id="sendPhoneBtn">SEND MY PHONE NUMBER</button>
+    </div>
+  </div>
+
+  <!-- WELCOME TRIAL MODAL -->
+  <div class="app-modal" id="welcomeTrialModal">
+    <div class="app-modal-card welcome-modal">
+      <button class="modal-x" data-close="welcomeTrialModal">×</button>
+      <div class="party-icon">🎉</div>
+
+      <h2>Welcome to TET Success!</h2>
+      <p>You are now on <b>7 Days Free Trial</b></p>
+
+      <div class="trial-benefits">
+        <div><span>📅</span><b>7 Days</b><small>Free Trial</small></div>
+        <div><span>📖</span><b>Full Access</b><small>All Features</small></div>
+        <div><span>🏅</span><b>No Payment</b><small>During Trial</small></div>
+      </div>
+
+      <button class="btn btn-primary" id="startTrialBtn">START TRIAL <span>→</span></button>
+    </div>
+  </div>
+
+  <!-- INSTALL APP MODAL -->
+  <div class="app-modal" id="installModal">
+    <div class="app-modal-card install-modal">
+      <button class="modal-x" data-close="installModal">×</button>
+
+      <div class="install-grid">
+        <div>
+          <div class="modal-icon">⬇</div>
+          <h2>Install TET Success</h2>
+          <p>Install the app for a better and faster learning experience.</p>
+        </div>
+
+        <div class="install-points">
+          <p>📶 Works Offline</p>
+          <p>⚡ Faster Performance</p>
+          <p>🛡 Secure & Lightweight</p>
+          <p>🌼 Easy Access</p>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" id="installNowBtn">⬇ INSTALL NOW</button>
+      <button class="text-btn" data-close="installModal">Maybe Later</button>
+    </div>
+  </div>
+
+  <!-- SUBSCRIPTION MODAL -->
+  <div class="app-modal" id="subscriptionModal">
+    <div class="app-modal-card subscription-modal">
+      <button class="modal-x" data-close="subscriptionModal">×</button>
+      <div class="sub-tag">Subscription Required</div>
+
+      <div class="modal-icon">🛡</div>
+      <h2>Self Declaration</h2>
+      <p>
+        I understand that TET Success is a learning platform designed to help me prepare for the WB Primary TET examination.
+        I acknowledge that my success depends on my own dedication, practice, and performance, and that TET Success cannot
+        guarantee selection or examination results.
+      </p>
+
+      <label class="agree-line">
+        <input type="checkbox" id="agreeDeclaration" />
+        I have read and agree to the above declaration.
+      </label>
+
+      <div class="premium-plan">
+        <div>
+          <div class="crown">👑</div>
+          <h3>Premium Plan</h3>
+          <p>✓ Full Premium Access</p>
+          <p>✓ All Tests & Content</p>
+          <p>✓ Performance Analytics</p>
+          <p>✓ Works Offline</p>
+          <p>✓ Faster Performance</p>
+          <p>✓ Secure & Lightweight</p>
+        </div>
+        <div class="price-box">
+          <h2>₹<span id="planFee">799</span></h2>
+          <b>One-Time Payment</b>
+          <p>Valid Until</p>
+          <h3 id="planValidity">30 September 2028</h3>
+        </div>
+      </div>
+
+      <button class="btn btn-primary disabled-soft" id="subscribeBtn">🔒 SUBSCRIBE & CONTINUE</button>
+      <button class="text-btn" data-close="subscriptionModal">Maybe Later</button>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+  <script src="tet_app_settings.js"></script>
+  <script src="common.js"></script>
+
+  <script>
+    let deferredInstallPrompt = null;
+    let currentUserForSubscription = null;
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      await initializeBackend();
+
+      if (isUserLoggedIn()) {
+        window.location.href = CONFIG.HOME_PAGE;
+        return;
+      }
+
+      bindLoginEvents();
+      registerPWA();
+    });
+
+    function bindLoginEvents() {
+      document.getElementById("openCreateBtn").onclick = () => openAppModal("createModal");
+      document.getElementById("openForgotNameBtn").onclick = () => openAppModal("forgotNameModal");
+      document.getElementById("openForgotPhoneBtn").onclick = () => openAppModal("forgotPhoneModal");
+
+      document.querySelectorAll("[data-close]").forEach(btn => {
+        btn.onclick = () => closeAppModal(btn.dataset.close);
+      });
+
+      document.getElementById("signInBtn").onclick = handleSignIn;
+      document.getElementById("createAccountBtn").onclick = handleCreateAccount;
+      document.getElementById("sendNameBtn").onclick = handleForgotName;
+      document.getElementById("sendPhoneBtn").onclick = handleForgotPhone;
+      document.getElementById("startTrialBtn").onclick = () => {
+        closeAppModal("welcomeTrialModal");
+        maybeShowInstallModal();
+        setTimeout(() => window.location.href = CONFIG.HOME_PAGE, 500);
+      };
+
+      document.getElementById("installNowBtn").onclick = installApp;
+
+      document.getElementById("agreeDeclaration").onchange = function () {
+        document.getElementById("subscribeBtn").classList.toggle("disabled-soft", !this.checked);
+      };
+
+      document.getElementById("subscribeBtn").onclick = openSubscriptionWhatsApp;
+
+      ["loginPhone", "createPhone", "forgotNamePhone"].forEach(id => {
+        document.getElementById(id).addEventListener("input", onlyDigits);
+      });
+
+      ["loginName", "createName", "forgotPhoneName"].forEach(id => {
+        document.getElementById(id).addEventListener("input", cleanNameLive);
+      });
+    }
+
+    function openAppModal(id) {
+      const modal = document.getElementById(id);
+      if (!modal) return;
+      modal.classList.add("show");
+      setTimeout(() => {
+        const input = modal.querySelector("input");
+        if (input) input.focus();
+      }, 250);
+    }
+
+    function closeAppModal(id) {
+      const modal = document.getElementById(id);
+      if (!modal) return;
+      modal.classList.remove("show");
+    }
+
+    function onlyDigits(e) {
+      e.target.value = e.target.value.replace(/\D/g, "").slice(0, 10);
+    }
+
+    function cleanNameLive(e) {
+      e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, "").replace(/\s+/g, " ");
+    }
+
+    function normalizeName(name) {
+      return name.trim().replace(/\s+/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+    }
+
+    function validateName(name) {
+      const clean = normalizeName(name);
+
+      if (!clean) return "Please write your Full Name";
+      if (clean.length < 2) return "Minimum 2 letters required";
+      if (clean.length > 40) return "letters limit 40";
+      if (/[0-9]/.test(name)) return "No number allowed";
+      if (/[^a-zA-Z\s]/.test(name)) return "No Symbol Allowed";
+
+      const parts = clean.split(" ");
+      if (parts.length > 1 && parts[0].toLowerCase() === parts[1].toLowerCase()) {
+        return "Name And Surname Should Different";
+      }
+
+      return "";
+    }
+
+    function validatePhone(phone) {
+      if (!phone) return "Please Write Your Ph No";
+      if (/\s/.test(phone)) return "No Spaces Allowed";
+      if (/[a-zA-Z]/.test(phone)) return "No Letter Allowed";
+      if (/[^0-9]/.test(phone)) return "No Symbol Allowed";
+      if (phone.length !== 10) return "Ph Number Should Be 10 Digit";
+      if (!/^[6-9]/.test(phone)) return "Incorrect Ph number";
+
+      const blocked = [
+        "0000000000","1111111111","2222222222","3333333333","4444444444",
+        "5555555555","6666666666","7777777777","8888888888","9999999999",
+        "1234567890"
+      ];
+
+      if (blocked.includes(phone)) return "Incorrect Ph number";
+
+      return "";
+    }
+
+    async function handleSignIn(e) {
+      const btn = e.currentTarget;
+      if (isDoubleTap()) return;
+
+      const name = normalizeName(document.getElementById("loginName").value);
+      const phone = document.getElementById("loginPhone").value.trim();
+
+      const nameError = validateName(name);
+      if (nameError) return showToast(nameError, "warning");
+
+      const phoneError = validatePhone(phone);
+      if (phoneError) return showToast(phoneError, "warning");
+
+      lockButton(btn);
+
+      try {
+        const { data: user, error } = await supabase
+          .from(CONFIG.TABLES.USERS)
+          .select("*")
+          .eq("phone", phone)
+          .maybeSingle();
+
+        if (error) throw error;
+
+        if (!user) {
+          showToast("No account found with this phone number", "error");
+          unlockButton(btn);
+          return;
+        }
+
+        if (normalizeName(user.full_name).toLowerCase() !== name.toLowerCase()) {
+          showToast("Name and phone number do not match", "error");
+          unlockButton(btn);
+          return;
+        }
+
+        await supabase
+          .from(CONFIG.TABLES.USERS)
+          .update({ last_login_at: new Date().toISOString() })
+          .eq("id", user.id);
+
+        await insertLoginHistory(user);
+
+        saveUserSession(user);
+        saveLanguage(user.selected_language || "english");
+
+        showToast("Login successful", "success");
+
+        const welcomeKey = "tet_trial_welcome_" + user.id;
+        const premium = await getTrialPremium(user.id);
+
+        if (premium?.status === "trial" && !localStorage.getItem(welcomeKey)) {
+          localStorage.setItem(welcomeKey, "shown");
+          currentUserForSubscription = user;
+          openAppModal("welcomeTrialModal");
+        } else {
+          setTimeout(() => window.location.href = CONFIG.HOME_PAGE, 600);
+        }
+
+      } catch (err) {
+        console.error(err);
+        showToast("Something went wrong. Please try again.", "error");
+        unlockButton(btn);
+      }
+    }
+
+    async function handleCreateAccount(e) {
+      const btn = e.currentTarget;
+      if (isDoubleTap()) return;
+
+      const name = normalizeName(document.getElementById("createName").value);
+      const phone = document.getElementById("createPhone").value.trim();
+
+      const nameError = validateName(name);
+      if (nameError) return showToast(nameError, "warning");
+
+      const phoneError = validatePhone(phone);
+      if (phoneError) return showToast(phoneError, "warning");
+
+      lockButton(btn);
+
+      try {
+        const { data: exists } = await supabase
+          .from(CONFIG.TABLES.USERS)
+          .select("id")
+          .eq("phone", phone)
+          .maybeSingle();
+
+        if (exists) {
+          showToast("An account already exists with this phone number", "warning");
+          unlockButton(btn);
+          return;
+        }
+
+        const { data: user, error } = await supabase
+          .from(CONFIG.TABLES.USERS)
+          .insert({
+            full_name: name,
+            phone: phone,
+            status: "trial",
+            selected_language: "english",
+            is_active: true,
+            last_login_at: new Date().toISOString()
+          })
+          .select()
+          .single();
+
+        if (error) throw error;
+
+        const today = new Date();
+        const trialEnd = new Date(today);
+        trialEnd.setDate(trialEnd.getDate() + Number(APP.trial_days || 7));
+
+        await supabase.from(CONFIG.TABLES.TRIAL_PREMIUM).insert({
+          user_id: user.id,
+          status: "trial",
+          trial_start_date: today.toISOString().slice(0, 10),
+          trial_end_date: trialEnd.toISOString().slice(0, 10),
+          payment_status: "pending",
+          payment_verified: false
+        });
+
+        await supabase.from(CONFIG.TABLES.USER_PROGRESS).insert({
+          user_id: user.id,
+          current_group: "Primary",
+          current_level: 1,
+          best_score: 0,
+          overall_progress: 0
+        });
+
+        await createInviteLink(user);
+        await insertLoginHistory(user);
+
+        saveUserSession(user);
+        saveLanguage("english");
+
+        showToast("Account created successfully", "success");
+        closeAppModal("createModal");
+        openAppModal("welcomeTrialModal");
+
+      } catch (err) {
+        console.error(err);
+        showToast("Something went wrong. Please try again.", "error");
+        unlockButton(btn);
+      }
+    }
+
+    async function handleForgotName(e) {
+      const btn = e.currentTarget;
+      const phone = document.getElementById("forgotNamePhone").value.trim();
+
+      const phoneError = validatePhone(phone);
+      if (phoneError) return showToast(phoneError, "warning");
+
+      lockButton(btn);
+
+      try {
+        const { data: user, error } = await supabase
+          .from(CONFIG.TABLES.USERS)
+          .select("full_name")
+          .eq("phone", phone)
+          .maybeSingle();
+
+        if (error) throw error;
+
+        if (!user) {
+          showToast("Phone no not found", "error");
+        } else {
+          showToast("Your registered name is: " + user.full_name, "success");
+        }
+
+      } catch (err) {
+        console.error(err);
+        showToast("Something went wrong. Please try again.", "error");
+      }
+
+      unlockButton(btn);
+    }
+
+    async function handleForgotPhone(e) {
+      const btn = e.currentTarget;
+      const name = normalizeName(document.getElementById("forgotPhoneName").value);
+
+      const nameError = validateName(name);
+      if (nameError) return showToast(nameError, "warning");
+
+      lockButton(btn);
+
+      try {
+        const { data: users, error } = await supabase
+          .from(CONFIG.TABLES.USERS)
+          .select("full_name, phone")
+          .ilike("full_name", name);
+
+        if (error) throw error;
+
+        if (!users || users.length === 0) {
+          showToast("Name Not Found", "error");
+        } else {
+          showToast("Your registered phone number is: " + users[0].phone, "success");
+        }
+
+      } catch (err) {
+        console.error(err);
+        showToast("Something went wrong. Please try again.", "error");
+      }
+
+      unlockButton(btn);
+    }
+
+    async function getTrialPremium(userId) {
+      const { data } = await supabase
+        .from(CONFIG.TABLES.TRIAL_PREMIUM)
+        .select("*")
+        .eq("user_id", userId)
+        .maybeSingle();
+
+      return data;
+    }
+
+    async function createInviteLink(user) {
+      const codeBase =
+        normalizeName(user.full_name).replace(/\s/g, "") +
+        new Date().getDate() +
+        user.phone.slice(-4);
+
+      let inviteCode = codeBase;
+      let inviteLink = `${APP.github_app_link || ""}?invite=${inviteCode}`;
+
+      const { data: existing } = await supabase
+        .from(CONFIG.TABLES.INVITE_LINKS)
+        .select("id")
+        .eq("invite_code", inviteCode)
+        .maybeSingle();
+
+      if (existing) {
+        inviteCode = codeBase + Math.floor(Math.random() * 9);
+        inviteLink = `${APP.github_app_link || ""}?invite=${inviteCode}`;
+      }
+
+      await supabase.from(CONFIG.TABLES.INVITE_LINKS).insert({
+        user_id: user.id,
+        full_name: user.full_name,
+        phone: user.phone,
+        invite_code: inviteCode,
+        invite_link: inviteLink
+      });
+
+      await supabase.from(CONFIG.TABLES.USERS).update({
+        invite_code: inviteCode,
+        invite_link: inviteLink
+      }).eq("id", user.id);
+    }
+
+    async function insertLoginHistory(user) {
+      await supabase.from(CONFIG.TABLES.LOGIN_HISTORY).insert({
+        user_id: user.id,
+        full_name: user.full_name,
+        phone: user.phone,
+        device_type: /Mobi|Android/i.test(navigator.userAgent) ? "Mobile" : "Desktop",
+        browser_name: navigator.userAgent,
+        app_version: APP.app_version || "1.0.0",
+        login_status: "success"
+      });
+    }
+
+    function maybeShowInstallModal() {
+      if (window.matchMedia("(display-mode: standalone)").matches) return;
+      if (!deferredInstallPrompt) return;
+
+      setTimeout(() => {
+        openAppModal("installModal");
+      }, 600);
+    }
+
+    function installApp() {
+      if (!deferredInstallPrompt) {
+        showToast("Install option not available now", "info");
+        return;
+      }
+
+      deferredInstallPrompt.prompt();
+      deferredInstallPrompt.userChoice.finally(() => {
+        deferredInstallPrompt = null;
+        closeAppModal("installModal");
+      });
+    }
+
+    function openSubscriptionWhatsApp() {
+      if (!document.getElementById("agreeDeclaration").checked) {
+        showToast("Please accept the declaration to continue.", "warning");
+        return;
+      }
+
+      const user = currentUserForSubscription || getUserSession();
+      if (!user) return showToast("User not found", "error");
+
+      const fee = APP.subscription_fee || 799;
+      const validity = formatDate(APP.premium_valid_until || "2028-09-30");
+
+      const message =
+`Hello,
+
+I want to upgrade to TET Success Premium.
+
+Name: ${user.full_name}
+Phone: ${user.phone}
+
+Plan:
+Premium Membership
+
+Subscription Fee:
+₹${fee} One-Time Payment
+
+Premium Validity:
+${validity}
+
+Access:
+Full Premium Access to all features until ${validity}.
+
+Self Declaration:
+I understand that TET Success is a learning platform designed to help me prepare for the WB Primary TET examination. I acknowledge that my success depends on my own dedication, practice, and performance, and that TET Success cannot guarantee selection or examination results.
+
+Payment Link:
+${APP.payment_link}
+
+After payment send screenshot for confirmation.
+
+Thank you.`;
+
+      openWhatsApp(APP.admin_whatsapp, message);
+    }
+
+    function registerPWA() {
+      window.addEventListener("beforeinstallprompt", (e) => {
+        e.preventDefault();
+        deferredInstallPrompt = e;
+      });
+
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("sw.js").catch(console.error);
+      }
+    }
+  </script>
+
+</body>
+</html>
