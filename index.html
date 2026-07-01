@@ -1076,3 +1076,375 @@ function validatePhone(phone) {
     return "";
 
 }
+/* =======================================================
+LOGIN USER
+======================================================= */
+
+async function handleLogin(event) {
+
+    const button = event.currentTarget;
+
+    if (isDoubleTap()) return;
+
+    const nameInput = document.getElementById("loginName").value;
+
+    const phoneInput = document.getElementById("loginPhone").value;
+
+    const fullName = normalizeUserName(nameInput);
+
+    const phone = phoneInput.trim();
+
+    const nameError = validateName(fullName);
+
+    if (nameError) {
+
+        showToast(nameError, "warning");
+
+        return;
+
+    }
+
+    const phoneError = validatePhone(phone);
+
+    if (phoneError) {
+
+        showToast(phoneError, "warning");
+
+        return;
+
+    }
+
+    lockButton(button);
+
+    try {
+
+        const { data: user, error } = await supabase
+            .from(CONFIG.TABLES.USERS)
+            .select("*")
+            .eq("phone", phone)
+            .maybeSingle();
+
+        if (error) throw error;
+
+        if (!user) {
+
+            showToast("Phone no not found", "error");
+
+            unlockButton(button);
+
+            return;
+
+        }
+
+        if (
+            normalizeUserName(user.full_name).toLowerCase() !==
+            fullName.toLowerCase()
+        ) {
+
+            showToast("Name and Phone number do not match", "error");
+
+            unlockButton(button);
+
+            return;
+
+        }
+
+        if (user.is_active === false) {
+
+            showToast("Your account is not active", "error");
+
+            unlockButton(button);
+
+            return;
+
+        }
+
+        await supabase
+            .from(CONFIG.TABLES.USERS)
+            .update({
+                last_login_at: new Date().toISOString()
+            })
+            .eq("id", user.id);
+
+        await insertLoginHistory(user);
+
+        saveUserSession(user);
+
+        saveLanguage(user.selected_language || "english");
+
+        showToast("Login successful", "success");
+
+        currentLoginUser = user;
+
+        setTimeout(function () {
+
+            window.location.href = CONFIG.HOME_PAGE;
+
+        }, 600);
+
+    } catch (error) {
+
+        console.error("Login Error:", error);
+
+        showToast("Something went wrong. Please try again.", "error");
+
+        unlockButton(button);
+
+    }
+
+}
+
+
+/* =======================================================
+CREATE ACCOUNT
+======================================================= */
+
+async function handleSignup(event) {
+
+    const button = event.currentTarget;
+
+    if (isDoubleTap()) return;
+
+    const nameInput = document.getElementById("signupName").value;
+
+    const phoneInput = document.getElementById("signupPhone").value;
+
+    const fullName = normalizeUserName(nameInput);
+
+    const phone = phoneInput.trim();
+
+    const nameError = validateName(fullName);
+
+    if (nameError) {
+
+        showToast(nameError, "warning");
+
+        return;
+
+    }
+
+    const phoneError = validatePhone(phone);
+
+    if (phoneError) {
+
+        showToast(phoneError, "warning");
+
+        return;
+
+    }
+
+    lockButton(button);
+
+    try {
+
+        const { data: existingUser, error: existingError } = await supabase
+            .from(CONFIG.TABLES.USERS)
+            .select("id")
+            .eq("phone", phone)
+            .maybeSingle();
+
+        if (existingError) throw existingError;
+
+        if (existingUser) {
+
+            showToast("An account already exists with this phone number", "warning");
+
+            unlockButton(button);
+
+            return;
+
+        }
+
+        const { data: user, error: userError } = await supabase
+            .from(CONFIG.TABLES.USERS)
+            .insert({
+                full_name: fullName,
+                phone: phone,
+                status: "trial",
+                selected_language: "english",
+                is_active: true,
+                last_login_at: new Date().toISOString()
+            })
+            .select("*")
+            .single();
+
+        if (userError) throw userError;
+
+        const today = new Date();
+
+        const trialEnd = new Date(today);
+
+        trialEnd.setDate(trialEnd.getDate() + Number(APP.trial_days || 7));
+
+        await supabase
+            .from(CONFIG.TABLES.TRIAL_PREMIUM)
+            .insert({
+                user_id: user.id,
+                status: "trial",
+                trial_start_date: today.toISOString().slice(0, 10),
+                trial_end_date: trialEnd.toISOString().slice(0, 10),
+                payment_status: "pending",
+                payment_verified: false
+            });
+
+        await supabase
+            .from(CONFIG.TABLES.USER_PROGRESS)
+            .insert({
+                user_id: user.id,
+                current_group: "Primary",
+                current_level: 1,
+                completed_levels: [],
+                best_score: 0,
+                overall_progress: 0
+            });
+
+        await createInviteLink(user);
+
+        await insertLoginHistory(user);
+
+        saveUserSession(user);
+
+        saveLanguage("english");
+
+        currentLoginUser = user;
+
+        showToast("Account created successfully", "success");
+
+        closeLoginModal("signupModal");
+
+        openLoginModal("welcomeTrialModal");
+
+    } catch (error) {
+
+        console.error("Signup Error:", error);
+
+        showToast("Something went wrong. Please try again.", "error");
+
+        unlockButton(button);
+
+    }
+
+}
+
+
+/* =======================================================
+FORGOT NAME
+======================================================= */
+
+async function handleForgotName(event) {
+
+    const button = event.currentTarget;
+
+    if (isDoubleTap()) return;
+
+    const phone = document.getElementById("forgotNamePhone").value.trim();
+
+    const phoneError = validatePhone(phone);
+
+    if (phoneError) {
+
+        showToast(phoneError, "warning");
+
+        return;
+
+    }
+
+    lockButton(button);
+
+    try {
+
+        const { data: user, error } = await supabase
+            .from(CONFIG.TABLES.USERS)
+            .select("full_name")
+            .eq("phone", phone)
+            .maybeSingle();
+
+        if (error) throw error;
+
+        if (!user) {
+
+            showToast("Phone no not found", "error");
+
+            unlockButton(button);
+
+            return;
+
+        }
+
+        showToast("Your registered name is " + user.full_name, "success");
+
+        unlockButton(button);
+
+    } catch (error) {
+
+        console.error("Forgot Name Error:", error);
+
+        showToast("Something went wrong. Please try again.", "error");
+
+        unlockButton(button);
+
+    }
+
+}
+
+
+/* =======================================================
+FORGOT PHONE
+======================================================= */
+
+async function handleForgotPhone(event) {
+
+    const button = event.currentTarget;
+
+    if (isDoubleTap()) return;
+
+    const nameInput = document.getElementById("forgotPhoneName").value;
+
+    const fullName = normalizeUserName(nameInput);
+
+    const nameError = validateName(fullName);
+
+    if (nameError) {
+
+        showToast(nameError, "warning");
+
+        return;
+
+    }
+
+    lockButton(button);
+
+    try {
+
+        const { data: users, error } = await supabase
+            .from(CONFIG.TABLES.USERS)
+            .select("full_name, phone")
+            .ilike("full_name", fullName);
+
+        if (error) throw error;
+
+        if (!users || users.length === 0) {
+
+            showToast("Name Not Found", "error");
+
+            unlockButton(button);
+
+            return;
+
+        }
+
+        showToast("Your registered phone number is " + users[0].phone, "success");
+
+        unlockButton(button);
+
+    } catch (error) {
+
+        console.error("Forgot Phone Error:", error);
+
+        showToast("Something went wrong. Please try again.", "error");
+
+        unlockButton(button);
+
+    }
+
+}
