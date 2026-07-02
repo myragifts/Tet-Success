@@ -943,12 +943,12 @@ function allowOnlyNameCharacters(event) {
     /* Allow only one space between words */
     value = value.replace(/\s+/g, " ");
 
-    /* Capitalize first letter of every word */
-    value = value.replace(/\b[a-z]/g, function(letter) {
-
-        return letter.toUpperCase();
-
-    });
+    /* Make every word start with a capital letter */
+    value = value
+        .toLowerCase()
+        .replace(/(^|\s)([a-z])/g, function(match, space, letter) {
+            return space + letter.toUpperCase();
+        });
 
     event.target.value = value;
 
