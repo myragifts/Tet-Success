@@ -2,24 +2,24 @@
    TET Success - Supabase Connection
 ========================================================= */
 
-window.supabase = Object.freeze(
-  window.supabase.createClient(
-    CONFIG.SUPABASE_URL,
-    CONFIG.SUPABASE_PUBLISHABLE_KEY,
-    {
-      auth: {
-        persistSession: false,
-        autoRefreshToken: false,
-        detectSessionInUrl: false
-      },
-      global: {
-        headers: {
-          "X-Client-Info": "TET-Success-Web"
-        }
+const tetSupabase = window.supabase.createClient(
+  CONFIG.SUPABASE_URL,
+  CONFIG.SUPABASE_PUBLISHABLE_KEY,
+  {
+    auth: {
+      persistSession: false,
+      autoRefreshToken: false,
+      detectSessionInUrl: false
+    },
+    global: {
+      headers: {
+        "X-Client-Info": "TET-Success-Web"
       }
     }
-  )
+  }
 );
+
+window.supabase = tetSupabase;
 
 async function checkSupabaseConnection() {
   try {
