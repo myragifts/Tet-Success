@@ -839,11 +839,15 @@ PAGE INIT
 
 document.addEventListener("DOMContentLoaded", async function () {
 
+    setupLoginEvents();
+
+    setupInstallPrompt();
+
     const backendReady = await initializeBackend();
 
     if (!backendReady) {
 
-        showToast("Unable to connect app. Please try again.", "error");
+        showToast("App connection failed. Check internet and try again.", "error");
 
         return;
 
@@ -858,10 +862,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         return;
 
     }
-
-    setupLoginEvents();
-
-    setupInstallPrompt();
 
 });
 
