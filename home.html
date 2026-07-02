@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>TET Success | Home</title>
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="stylesheet" href="style.css">
+
+<style>
+.home-page{
+  min-height:100vh;
+  background:linear-gradient(180deg,#EAF2EC 0%,#F6F8F7 42%,#FDFBF5 100%);
+  padding:18px 14px 92px;
+  max-width:520px;
+  margin:0 auto;
+}
+
+.home-header{
+  background:linear-gradient(135deg,#6B8F71,#4F6F5A);
+  color:#fff;
+  border-radius:0 0 28px 28px;
+  padding:24px 18px 76px;
+  margin:-18px -14px 0;
+  position:relative;
+}
+
+.home-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.home-brand h1{
+  margin:0;
+  font-size:34px;
+  font-weight:700;
+  letter-spacing:.3px;
+}
+
+.home-brand p{
+  margin:4px 0 0;
+  font-size:18px;
+  opacity:.9;
+}
+
+.header-actions{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  align-items:flex-end;
+}
+
+.language-box{
+  background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.25);
+  color:#fff;
+  border-radius:18px;
+  padding:10px 12px;
+  font-weight:600;
+  outline:none;
+}
+
+.status-badge{
+  background:#FFF8E9;
+  color:#6A4A12;
+  border:1px solid #EAD8A6;
+  border-radius:18px;
+  padding:10px 14px;
+  font-weight:700;
+  text-align:center;
+  min-width:128px;
+}
+
+.status-badge small{
+  display:block;
+  font-size:11px;
+  font-weight:500;
+  margin-top:2px;
+}
+
+.greeting-card{
+  background:#fff;
+  border-radius:24px;
+  padding:20px;
+  margin-top:-54px;
+  position:relative;
+  box-shadow:0 18px 42px rgba(47,58,54,.14);
+  border:1px solid #E3E8E5;
+}
+
+.greet-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+}
+
+.avatar{
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  background:#EAF2EC;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:34px;
+}
+
+.greet-text{
+  flex:1;
+}
+
+.greet-text h2{
+  margin:0;
+  font-size:22px;
+}
+
+.greet-text p{
+  margin:5px 0 0;
+  color:#6B756E;
+  font-size:15px;
+}
+
+.progress-circle{
+  width:78px;
+  height:78px;
+  border-radius:50%;
+  background:conic-gradient(#6B8F71 var(--progress),#E8EEE9 0);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  font-size:20px;
+  font-weight:700;
+}
+
+.progress-circle::before{
+  content:"";
+  position:absolute;
+  width:60px;
+  height:60px;
+  background:#fff;
+  border-radius:50%;
+}
+
+.progress-circle span{
+  position:relative;
+  z-index:1;
+}
+
+.progress-label{
+  text-align:center;
+  font-size:12px;
+  color:#6B756E;
+  margin-top:5px;
+}
+
+.info-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:20px;
+}
+
+.info-box{
+  background:#FAFBFA;
+  border:1px solid #E3E8E5;
+  border-radius:16px;
+  padding:14px;
+}
+
+.info-box small{
+  color:#6B756E;
+}
+
+.info-box b{
+  display:block;
+  margin-top:4px;
+  font-size:16px;
+}
+
+.continue-btn{
+  margin-top:18px;
+}
+
+.blackboard{
+  margin-top:20px;
+  background:#213D2A;
+  color:#fff;
+  border-radius:18px;
+  padding:18px;
+  border:7px solid #7A5734;
+  box-shadow:0 12px 30px rgba(47,58,54,.18);
+  text-align:center;
+}
+
+.blackboard h3{
+  color:#F4D57A;
+  margin:0 0 10px;
+  font-size:24px;
+  letter-spacing:1px;
+}
+
+.blackboard p{
+  margin:6px 0;
+  font-size:19px;
+  line-height:1.45;
+}
+
+.blackboard small{
+  display:block;
+  margin-top:12px;
+  color:#E8E8E8;
+}
+
+.section-heading{
+  text-align:center;
+  margin:24px 0 14px;
+  font-size:20px;
+  color:#4F6F5A;
+  font-weight:700;
+}
+
+.subject-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.subject-card{
+  background:#fff;
+  border:1px solid #E3E8E5;
+  border-radius:18px;
+  padding:14px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  box-shadow:0 8px 22px rgba(47,58,54,.08);
+}
+
+.subject-icon{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background:#EEF5F1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
+}
+
+.subject-card b{
+  display:block;
+  font-size:16px;
+}
+
+.subject-card small{
+  color:#6B756E;
+}
+
+.total-card{
+  border-color:#9DB8A3;
+  background:#F5FAF6;
+}
+
+.motivation-card{
+  margin-top:22px;
+  background:#F8FBF7;
+  border:1px solid #C9DDD0;
+  border-radius:20px;
+  padding:18px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  box-shadow:0 8px 22px rgba(47,58,54,.08);
+}
+
+.quote-icon{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  background:#6B8F71;
+  color:#fff;
+  font-size:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.motivation-card h3{
+  margin:0 0 6px;
+  color:#4F6F5A;
+}
+
+.motivation-card p{
+  margin:0;
+  line-height:1.45;
+}
+
+.home-bottom-nav{
+  position:fixed;
+  left:50%;
+  bottom:0;
+  transform:translateX(-50%);
+  width:100%;
+  max-width:520px;
+  height:78px;
+  background:#fff;
+  border-top:1px solid #E3E8E5;
+  box-shadow:0 -8px 24px rgba(47,58,54,.08);
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  z-index:8000;
+}
+
+.home-bottom-nav button{
+  background:none;
+  border:none;
+  color:#6B756E;
+  font-weight:600;
+  font-size:12px;
+}
+
+.home-bottom-nav button span{
+  display:block;
+  font-size:24px;
+  margin-bottom:3px;
+}
+
+.home-bottom-nav button.active{
+  color:#4F6F5A;
+}
+
+@media(max-width:390px){
+  .home-brand h1{font-size:28px}
+  .home-brand p{font-size:15px}
+  .greeting-card{padding:16px}
+  .subject-card{padding:12px}
+}
+</style>
+</head>
+
+<body>
+
+<main class="home-page">
+
+  <header class="home-header">
+    <div class="home-top">
+      <div class="home-brand">
+        <h1>TET Success 🌿</h1>
+        <p>Your TET Guru</p>
+      </div>
+
+      <div class="header-actions">
+        <select id="languageSelect" class="language-box">
+          <option value="english">English</option>
+          <option value="hindi">Hindi</option>
+          <option value="bengali">Bengali</option>
+        </select>
+
+        <div id="statusBadge" class="status-badge">
+          Trial Version
+          <small>Loading...</small>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="greeting-card">
+    <div class="greet-row">
+      <div class="avatar">👤</div>
+
+      <div class="greet-text">
+        <h2>Hi, <span id="userName">User</span> 👋</h2>
+        <p>Welcome back</p>
+      </div>
+
+      <div>
+        <div class="progress-circle" id="progressCircle" style="--progress:0%">
+          <span id="progressText">0%</span>
+        </div>
+        <div class="progress-label">Overall Progress</div>
+      </div>
+    </div>
+
+    <div class="info-row">
+      <div class="info-box">
+        <small>Current Group</small>
+        <b id="currentGroup">Primary TET</b>
+      </div>
+
+      <div class="info-box">
+        <small>Current Level</small>
+        <b id="currentLevel">Level 1</b>
+      </div>
+    </div>
+
+    <button id="continueLearningBtn" class="btn btn-primary continue-btn">
+      📖 Continue Learning →
+    </button>
+  </section>
+
+  <section class="blackboard">
+    <h3 id="noticeTitle">NOTICE</h3>
+    <p id="noticeMessage">Welcome to TET Success</p>
+    <small id="noticeDate">Start your preparation today.</small>
+  </section>
+
+  <h2 class="section-heading">Subject Quick Access</h2>
+
+  <section class="subject-grid">
+    <button class="subject-card" data-subject="CDP">
+      <div class="subject-icon">🧠</div>
+      <div><b>CDP</b><small>30 Marks</small></div>
+    </button>
+
+    <button class="subject-card" data-subject="Bengali">
+      <div class="subject-icon">অ</div>
+      <div><b>Bengali</b><small>30 Marks</small></div>
+    </button>
+
+    <button class="subject-card" data-subject="English">
+      <div class="subject-icon">ABC</div>
+      <div><b>English</b><small>30 Marks</small></div>
+    </button>
+
+    <button class="subject-card" data-subject="Mathematics">
+      <div class="subject-icon">➗</div>
+      <div><b>Mathematics</b><small>30 Marks</small></div>
+    </button>
+
+    <button class="subject-card" data-subject="EVS">
+      <div class="subject-icon">🌿</div>
+      <div><b>EVS</b><small>30 Marks</small></div>
+    </button>
+
+    <button class="subject-card total-card" id="totalMarksBtn">
+      <div class="subject-icon">🏆</div>
+      <div><b>TOTAL</b><small>Target 140+</small></div>
+    </button>
+  </section>
+
+  <section class="motivation-card">
+    <div class="quote-icon">“</div>
+    <div>
+      <h3>Today’s Motivation</h3>
+      <p id="motivationText">Every question you solve today brings you closer to success.</p>
+    </div>
+  </section>
+
+</main>
+
+<nav class="home-bottom-nav">
+  <button class="active" onclick="navigateTo('home.html')"><span>🏠</span>Home</button>
+  <button onclick="navigateTo('info.html')"><span>ℹ️</span>Info</button>
+  <button onclick="navigateTo('learn.html')"><span>📖</span>Learn</button>
+  <button onclick="navigateTo('profile.html')"><span>👤</span>Profile</button>
+</nav>
+
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+<script src="tet_app_settings.js"></script>
+<script src="common.js"></script>
+
+<script>
+let HOME_USER = null;
+let HOME_PROGRESS = null;
+
+function tableName(key, fallback){
+  return CONFIG.TABLES[key] || fallback;
+}
+
+document.addEventListener("DOMContentLoaded", async function(){
+
+  const backendReady = await initializeBackend();
+
+  if(!backendReady){
+    showToast("App connection failed. Please try again.", "error");
+    return;
+  }
+
+  HOME_USER = getUserSession();
+
+  if(!HOME_USER){
+    window.location.href = CONFIG.LOGIN_PAGE || "index.html";
+    return;
+  }
+
+  setActiveBottomNav("home");
+
+  await loadHomeData();
+
+  bindHomeEvents();
+
+});
+
+async function loadHomeData(){
+
+  renderUserBasic();
+
+  await loadFreshUser();
+
+  await loadProgress();
+
+  await loadTrialPremium();
+
+  await loadNotice();
+
+  await loadMotivation();
+
+}
+
+function renderUserBasic(){
+
+  document.getElementById("userName").textContent =
+    HOME_USER.full_name || "User";
+
+  const lang = HOME_USER.selected_language || getCurrentLanguage();
+
+  document.getElementById("languageSelect").value = lang || "english";
+
+}
+
+async function loadFreshUser(){
+
+  try{
+
+    const { data } = await supabase
+      .from(tableName("USERS","tet_users"))
+      .select("*")
+      .eq("id", HOME_USER.id)
+      .maybeSingle();
+
+    if(data){
+      HOME_USER = data;
+      saveUserSession(data);
+      renderUserBasic();
+    }
+
+  }catch(error){
+    console.error("User load error:", error);
+  }
+
+}
+
+async function loadProgress(){
+
+  try{
+
+    const { data } = await supabase
+      .from(tableName("USER_PROGRESS","tet_user_progress"))
+      .select("*")
+      .eq("user_id", HOME_USER.id)
+      .maybeSingle();
+
+    HOME_PROGRESS = data || {
+      current_group:"Primary TET",
+      current_level:1,
+      overall_progress:0
+    };
+
+    const group = HOME_PROGRESS.current_group || "Primary TET";
+    const level = HOME_PROGRESS.current_level || 1;
+    const progress = Number(HOME_PROGRESS.overall_progress || 0);
+
+    document.getElementById("currentGroup").textContent = group;
+    document.getElementById("currentLevel").textContent = "Level " + level;
+    document.getElementById("progressText").textContent = progress + "%";
+    document.getElementById("progressCircle").style.setProperty("--progress", progress + "%");
+
+  }catch(error){
+
+    console.error("Progress load error:", error);
+
+  }
+
+}
+
+async function loadTrialPremium(){
+
+  try{
+
+    const { data } = await supabase
+      .from(tableName("TRIAL_PREMIUM","tet_trial_premium"))
+      .select("*")
+      .eq("user_id", HOME_USER.id)
+      .maybeSingle();
+
+    const badge = document.getElementById("statusBadge");
+
+    if(data && data.status === "premium"){
+      badge.innerHTML = "👑 Premium Member<small>Valid till " + formatDate(data.premium_valid_until || APP.premium_valid_until || "2028-09-30") + "</small>";
+      return;
+    }
+
+    if(data && data.trial_end_date){
+      badge.innerHTML = "Trial Version<small>Ends " + formatDate(data.trial_end_date) + "</small>";
+      return;
+    }
+
+    badge.innerHTML = "Trial Version<small>7 Days Free Trial</small>";
+
+  }catch(error){
+
+    console.error("Trial/Premium load error:", error);
+
+  }
+
+}
+
+async function loadNotice(){
+
+  try{
+
+    const { data, error } = await supabase
+      .from(tableName("NOTICE_BOARD","tet_notice_board"))
+      .select("*")
+      .order("created_at",{ ascending:false })
+      .limit(1)
+      .maybeSingle();
+
+    if(error || !data){
+      setDefaultNotice();
+      return;
+    }
+
+    document.getElementById("noticeTitle").textContent =
+      data.notice_title || data.title || "NOTICE";
+
+    document.getElementById("noticeMessage").textContent =
+      data.notice_message || data.message || "Welcome to TET Success";
+
+    document.getElementById("noticeDate").textContent =
+      formatDate(data.notice_date || data.created_at) || "Start your preparation today.";
+
+  }catch(error){
+
+    console.error("Notice load error:", error);
+    setDefaultNotice();
+
+  }
+
+}
+
+function setDefaultNotice(){
+
+  document.getElementById("noticeTitle").textContent = "NOTICE";
+  document.getElementById("noticeMessage").textContent = "Welcome to TET Success";
+  document.getElementById("noticeDate").textContent = "Start your preparation today.";
+
+}
+
+async function loadMotivation(){
+
+  try{
+
+    const { data, error } = await supabase
+      .from(tableName("DAILY_MOTIVATION","tet_daily_motivation"))
+      .select("*")
+      .order("created_at",{ ascending:false })
+      .limit(1)
+      .maybeSingle();
+
+    if(error || !data){
+      return;
+    }
+
+    document.getElementById("motivationText").textContent =
+      data.motivation_text || data.message || "Every question you solve today brings you closer to success.";
+
+  }catch(error){
+
+    console.error("Motivation load error:", error);
+
+  }
+
+}
+
+function bindHomeEvents(){
+
+  document.getElementById("languageSelect").addEventListener("change", async function(){
+
+    const lang = this.value;
+
+    saveLanguage(lang);
+
+    try{
+
+      await supabase
+        .from(tableName("USERS","tet_users"))
+        .update({ selected_language: lang })
+        .eq("id", HOME_USER.id);
+
+      HOME_USER.selected_language = lang;
+      saveUserSession(HOME_USER);
+
+      showToast("Language saved", "success");
+
+    }catch(error){
+
+      console.error("Language save error:", error);
+      showToast("Unable to save language", "error");
+
+    }
+
+  });
+
+  document.querySelectorAll("[data-subject]").forEach(function(btn){
+
+    btn.addEventListener("click", function(){
+
+      const subject = btn.dataset.subject;
+
+      showToast(subject + " - 30 Marks", "info");
+
+    });
+
+  });
+
+  document.getElementById("totalMarksBtn").addEventListener("click", function(){
+
+    showToast("Total Marks 150 - Our Target 140+", "success");
+
+  });
+
+  document.getElementById("continueLearningBtn").addEventListener("click", function(){
+
+    const group = encodeURIComponent(HOME_PROGRESS?.current_group || "Primary TET");
+    const level = encodeURIComponent(HOME_PROGRESS?.current_level || 1);
+
+    window.location.href = "learn.html?group=" + group + "&level=" + level;
+
+  });
+
+}
+</script>
+
+</body>
+</html>
