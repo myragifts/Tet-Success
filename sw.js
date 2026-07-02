@@ -8,27 +8,21 @@ const CACHE_NAME = "tet-success-v1";
 
 const FILES_TO_CACHE = [
 
-  "./",
+    "./",
 
-  "./index.html",
-  "./home.html",
-  "./learn.html",
-  "./info.html",
-  "./profile.html",
-  "./adminlogin.html",
-  "./admin.html",
+    "./index.html",
 
-  "./style.css",
+    "./style.css",
 
-  "./config.js",
-  "./supabase.js",
-  "./tet_app_settings.js",
-  "./common.js",
+    "./config.js",
 
-  "./icon-192.png",
-  "./icon-512.png",
+    "./supabase.js",
 
-  "./manifest.json"
+    "./tet_app_settings.js",
+
+    "./common.js",
+
+    "./manifest.json"
 
 ];
 
