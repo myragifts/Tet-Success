@@ -271,11 +271,11 @@ textarea{
 
     transform:translate(-50%,20px);
 
-    width:82%;
-    max-width:320px;
-    min-height:56px;
+    width:78%;
+    max-width:290px;
+    min-height:48px;
 
-    padding:14px 18px;
+    padding:10px 14px;
 
     display:flex;
     align-items:center;
@@ -283,18 +283,18 @@ textarea{
 
     text-align:center;
 
-    font-size:15px;
-    font-weight:700;
+    font-size:14px;
+    font-weight:500;
     line-height:1.35;
 
-    border-radius:14px;
+    border-radius:12px;
 
     background:#FDF8EA;
     color:#7A5A18;
 
     border:1px solid #EAD8A6;
 
-    box-shadow:0 8px 20px rgba(47,58,54,.10);
+    box-shadow:0 6px 16px rgba(47,58,54,.08);
 
     opacity:0;
     visibility:hidden;
