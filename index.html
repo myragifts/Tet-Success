@@ -990,9 +990,25 @@ function allowOnlyPhoneDigits(event) {
 
 function allowOnlyNameCharacters(event) {
 
-    event.target.value = event.target.value
-        .replace(/[^a-zA-Z\s]/g, "")
-        .replace(/\s+/g, " ");
+    let value = event.target.value;
+
+    /* Allow only English letters and spaces */
+    value = value.replace(/[^a-zA-Z\s]/g, "");
+
+    /* Remove leading spaces */
+    value = value.replace(/^\s+/, "");
+
+    /* Allow only one space between words */
+    value = value.replace(/\s+/g, " ");
+
+    /* Capitalize first letter of every word */
+    value = value.replace(/\b[a-z]/g, function(letter) {
+
+        return letter.toUpperCase();
+
+    });
+
+    event.target.value = value;
 
 }
 
