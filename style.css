@@ -975,3 +975,18 @@ transform:translateY(0) scale(1);
     opacity:.55;
     pointer-events:none;
 }
+
+/* Toast final position and size fix */
+.tet-toast{
+  width:calc(100% - 32px);
+  max-width:520px;
+  min-height:86px;
+  bottom:170px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-size:18px;
+  font-weight:700;
+  line-height:1.4;
+}
