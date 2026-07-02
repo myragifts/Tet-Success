@@ -259,51 +259,93 @@ textarea{
    Premium Toast
 ========================================================= */
 
+/* ==========================================================
+   Premium Toast (Final)
+========================================================== */
+
 .tet-toast{
-  position:fixed;
-  left:50%;
-  bottom:calc(var(--nav-height) + 18px);
-  transform:translate(-50%,20px);
-  width:calc(100% - 32px);
-  max-width:460px;
-  z-index:9999;
-  padding:14px 16px;
-  border-radius:14px;
-  box-shadow:var(--shadow);
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .28s ease, transform .28s ease;
-  font-weight:600;
-  border:1px solid transparent;
+
+    position:fixed;
+    left:50%;
+    bottom:120px;
+
+    transform:translate(-50%,20px);
+
+    width:82%;
+    max-width:320px;
+    min-height:56px;
+
+    padding:14px 18px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    font-size:15px;
+    font-weight:700;
+    line-height:1.35;
+
+    border-radius:14px;
+
+    background:#FDF8EA;
+    color:#7A5A18;
+
+    border:1px solid #EAD8A6;
+
+    box-shadow:0 8px 20px rgba(47,58,54,.10);
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:
+        opacity .25s ease,
+        transform .25s ease;
+
+    z-index:9999;
+
 }
 
 .tet-toast.show{
-  opacity:1;
-  transform:translate(-50%,0);
+
+    opacity:1;
+    visibility:visible;
+
+    transform:translate(-50%,0);
+
 }
 
-.tet-toast-success{
-  background:#E7F2EA;
-  color:#27583A;
-  border-color:#B9D7C1;
+.tet-toast.success{
+
+    background:#EEF7F1;
+    color:#2E6B43;
+    border-color:#B9D8C3;
+
 }
 
-.tet-toast-error{
-  background:#F8EAEA;
-  color:#8A2F2D;
-  border-color:#E7B9B8;
+.tet-toast.error{
+
+    background:#FBEFEE;
+    color:#A63A3A;
+    border-color:#E5B8B8;
+
 }
 
-.tet-toast-warning{
-  background:#FFF7E5;
-  color:#8B641C;
-  border-color:#E8D9B5;
+.tet-toast.warning{
+
+    background:#FDF8EA;
+    color:#7A5A18;
+    border-color:#EAD8A6;
+
 }
 
-.tet-toast-info{
-  background:#EEF5F3;
-  color:#3E675D;
-  border-color:#C9DDD7;
+.tet-toast.info{
+
+    background:#EEF5FB;
+    color:#2D5D8A;
+    border-color:#BCD7EE;
+
 }
 
 /* =========================================================
